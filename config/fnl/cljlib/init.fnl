@@ -740,7 +740,7 @@ Map `mul' over two tables:
 Basic `zipmap' implementation:
 
 ``` fennel
-(import-macros {: into} :init-macros)
+(import-macros {: into} :cljlib.init-macros)
 (fn zipmap [keys vals]
   (into {} (mapv vector keys vals)))
 
@@ -994,11 +994,11 @@ Deep comparison is used for tables which use tables as keys:
   ([f] f)
   ([f g]
    (defn
-    ([] (f (g)))
+    ([] (f (g))
      ([x] (f (g x)))
      ([x y] (f (g x y)))
      ([x y z] (f (g x y z)))
-     ([x y z & args] (f (g x y z (_unpack args))))))
+     ([x y z & args] (f (g x y z (_unpack args)))))))
   ([f g & fs]
    (reduce comp (consj fs g f))))
 
@@ -1008,10 +1008,10 @@ amount of arguments as `f', has the same effect, and returns the
 oppisite truth value."
   [f]
   (defn
-   ([] (not (f)))
+   ([] (not (f))
     ([a] (not (f a)))
     ([a b] (not (f a b)))
-    ([a b & cs] (not (apply f a b cs)))))
+    ([a b & cs] (not (apply f a b cs))))))
 
 (defn core.constantly
   "Returns a function that takes any number of arguments and returns `x'."
@@ -1420,3 +1420,4 @@ syntax. Use `hash-set' function instead."
 ;; LocalWords:  args tbl LocalWords memoized referentially Andrey
 ;; LocalWords:  Orst codepoints Listopadov metamethods nums multifn
 ;; LocalWords:  stateful LuaJIT
+
